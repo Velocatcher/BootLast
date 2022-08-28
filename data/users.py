@@ -14,13 +14,8 @@ class User(SqlAlchemyBase, UserMixin, SerializerMixin):
     name = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     email = sqlalchemy.Column(sqlalchemy.String, index=True, unique=True, nullable=True)
     password = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    created_date = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.datetime.now)
-    city = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    img = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     telephone = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    count_basket = sqlalchemy.Column(sqlalchemy.Integer, nullable=True)
-    id_product = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    count_product = sqlalchemy.Column(sqlalchemy.String, nullable=True)
+    created_date = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.datetime.now)
 
     def set_password(self, password):
         self.hashed_password = generate_password_hash(password)
@@ -29,4 +24,4 @@ class User(SqlAlchemyBase, UserMixin, SerializerMixin):
         return check_password_hash(self.hashed_password, password)
 
     def __repr__(self):
-        return f'{self.id}, {self.name}, {self.about}, {self.email}'
+        return f'{self.id}, {self.name}, {self.telephone}, {self.email}'
