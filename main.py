@@ -6,7 +6,7 @@ from data import db_session, users
 
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'world world world hello' # csrf-атаки
+app.config['SECRET_KEY'] = 'world world world hello'  # csrf-атаки
 
 
 @app.route('/', methods=['GET', 'POST'])
