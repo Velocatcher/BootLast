@@ -3,13 +3,14 @@ from auth import LoginForm
 from flask_login import login_user
 from reg import RegisterForm
 from data import db_session, users
+from werkzeug.security import generate_password_hash
 
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'world world world hello'  # csrf-атаки
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
 def main():
     return render_template('base.html')
 
@@ -38,7 +39,7 @@ def reg():
                 name=form.name.data,
                 email=form.email.data,
                 telephone=form.telephone.data,
-                password=form.password.data
+                password=generate_password_hash(form.password.data)
             )
             user.set_password(form.password.data)
             sessions.add(user)
