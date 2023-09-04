@@ -22,7 +22,7 @@ def login():
     if form.validate_on_submit():
         sessions = db_session.create_session()
         user = sessions.query(users.User).filter(users.User.email == form.email.data).first()
-        if user and user.password == form.password.data:
+        if user and user.password == generate_password_hash(form.password.data):
             login_user(user, remember=form.remember_me.data)
             return redirect('/')
     return render_template('login.html', form=form)
